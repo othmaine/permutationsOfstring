@@ -1,0 +1,53 @@
+#include<iostream>
+#include<vector>
+//#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+#define loop(i,n) for(ll i=0; i<n; i++) 
+#define fillArray(n,arr) int arr[n]; for(int ii=0; ii<n; ii++)cin>>arr[ii]
+//#include <bits/stdc++.h> 
+using namespace std; 
+
+vector<char> permutation;
+int  perm_cnt =0;
+string s;
+bool is_visited[1000];
+
+void get_perm(int i=0, int places=s.size())
+{
+    if(i == places)
+    {
+        for(auto x: permutation)
+            cout<<x;
+        cout<<"\n";
+        perm_cnt++;
+    }
+    
+        for(int j=0; j<s.size(); j++)
+        {
+            if(is_visited[j])
+                continue;
+            permutation.push_back(s[j]);
+            is_visited[j] =1;
+            get_perm(i+1,places);
+            is_visited[j] =0;
+            permutation.pop_back();
+        }
+}
+
+
+int main() 
+{
+    cout<<"Enter the string that will get all the permutations between its letters ";
+    cin>>s;
+    int places;
+    cout<<"Now insert the number of places";
+    cin>>places;
+    if(places>s.size()) 
+        cout<<"must be less than size\n";
+    else
+    {
+        get_perm(0,places);
+        cout<<perm_cnt;
+    }
+} 
